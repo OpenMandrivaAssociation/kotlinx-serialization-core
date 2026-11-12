@@ -81,7 +81,11 @@ kotlinc -J-Xmx2g -jvm-target 1.8 -language-version 2.0 -no-stdlib \
 test "$(find classes -name '*.class' | wc -l)" -eq 228
 test -s classes/kotlinx/serialization/SerializersKt.class
 test -s classes/kotlinx/serialization/internal/InstantSerializer.class
-printf '%s\n' 'Manifest-Version: 1.0' 'Automatic-Module-Name: kotlinx.serialization.core' > manifest.mf
+printf '%s\n' \
+	'Manifest-Version: 1.0' \
+	'Automatic-Module-Name: kotlinx.serialization.core' \
+	'Implementation-Version: %{version}' \
+	'Require-Kotlin-Version: 1.8' > manifest.mf
 jar cfm kotlinx-serialization-core.jar manifest.mf -C classes .
 jar i kotlinx-serialization-core.jar
 desc=$(jar --describe-module --file kotlinx-serialization-core.jar)
