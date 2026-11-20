@@ -1,2 +1,4 @@
 sources:
+  kotlinx-serialization-core-1.13.0.tar.gz: e8353cfa65c7b80c77530c8ec2fc8c09eff7da04
+removed_sources:
   kotlinx-serialization-core-1.11.0.tar.gz: 185be2e08346b649c73e55aea615e131002e3be5

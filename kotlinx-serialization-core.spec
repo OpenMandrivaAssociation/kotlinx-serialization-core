@@ -1,11 +1,11 @@
 Name:		kotlinx-serialization-core
-Version:	1.11.0
+Version:	1.13.0
 Release:	1
 Summary:	Kotlin serialization core for the JVM
 Group:		Development/Java
 License:	Apache-2.0
 URL:		https://github.com/Kotlin/kotlinx.serialization
-# kotlinx.serialization tag v1.11.0 (6956af2e6073347c7832c3c5b374fa3b5a345956).
+# kotlinx.serialization tag v1.13.0.
 # JVM classes for the catalog coordinate kotlinx-serialization-core.
 # Upstream publishes that artifactId as a pom that points at the -jvm jar.
 Source0:	kotlinx-serialization-core-%{version}.tar.gz
@@ -20,7 +20,7 @@ BuildRequires:	mvn(org.jetbrains.kotlin:kotlin-time-instant)
 
 %description
 org.jetbrains.kotlinx:kotlinx-serialization-core %{version}.
-JVM core serializers from tag v1.11.0, compiled with kotlinc 2.0.21.
+JVM core serializers from tag v1.13.0, compiled with kotlinc 2.0.21.
 InstantSerializer needs kotlin.time.Instant from kotlin-time-instant
 2.4.21 because the installed stdlib 2.0.21 has no Instant type.
 Two IgnorableReturnValue annotations are omitted. They only affect the
@@ -76,11 +76,13 @@ kotlinc -J-Xmx2g -jvm-target 1.8 -language-version 2.0 -no-stdlib \
 	-opt-in=kotlinx.serialization.SealedSerializationApi \
 	-opt-in=kotlin.ExperimentalSubclassOptIn \
 	-opt-in=kotlin.time.ExperimentalTime \
+	-opt-in=kotlin.uuid.ExperimentalUuidApi \
 	-opt-in=kotlin.ExperimentalMultiplatform \
 	-cp "$STDLIB:$INSTANT" -d classes @sources.list
-test "$(find classes -name '*.class' | wc -l)" -eq 228
+test "$(find classes -name '*.class' | wc -l)" -eq 229
 test -s classes/kotlinx/serialization/SerializersKt.class
 test -s classes/kotlinx/serialization/internal/InstantSerializer.class
+test -s classes/kotlinx/serialization/internal/UuidSerializer.class
 printf '%s\n' \
 	'Manifest-Version: 1.0' \
 	'Automatic-Module-Name: kotlinx.serialization.core' \
